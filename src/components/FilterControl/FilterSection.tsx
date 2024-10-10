@@ -1,11 +1,14 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import FilterSummaryItem from './FilterSummaryItem';
 
 interface FilterSectionProps {
-  title: string;
-  icon?: ReactNode; // Assuming the icon is optional
+  title: ReactNode;
+  icon?: ReactNode;
   expanded: boolean;
   onToggle: () => void;
   children: ReactNode;
+  summaryItems?: string[];
+  onRemoveSummaryItem?: (item: string) => void;
 }
 
 function FilterSection({
@@ -14,10 +17,9 @@ function FilterSection({
   expanded,
   onToggle,
   children,
+  summaryItems = [],
+  onRemoveSummaryItem,
 }: FilterSectionProps) {
-  // Log the expanded state to check if it's toggling correctly
-  useEffect(() => {}, [expanded, title]);
-
   return (
     <div className={`filter-section ${expanded ? 'expanded' : ''}`}>
       <div className="filter-header" onClick={onToggle}>
@@ -26,6 +28,20 @@ function FilterSection({
           <span className="arrow">{expanded ? '▲' : '▼'}</span>
         </span>
       </div>
+
+      {/* Display summary items only if section is collapsed and has selections */}
+      {!expanded && summaryItems.length > 0 && (
+        <div className="summary-group">
+          {summaryItems.map((item) => (
+            <FilterSummaryItem
+              key={item}
+              label={item}
+              onRemove={() => onRemoveSummaryItem && onRemoveSummaryItem(item)}
+            />
+          ))}
+        </div>
+      )}
+
       {expanded && <div className="filter-details">{children}</div>}
     </div>
   );

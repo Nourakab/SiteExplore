@@ -11,21 +11,35 @@ export function useFilters(allSites: any[], loading: boolean) {
 
   const [filteredSites, setFilteredSites] = useState(allSites);
 
-  // Define a filtering function
+  // Function to apply the filters to allSites
   const applyFilters = () => {
     let filtered = [...allSites];
 
-    // Filter by date range
-    if (filters.startDate || filters.endDate) {
+    if (filters.startDate && filters.endDate) {
       filtered = filtered.filter((site) => {
         const createdAt = new Date(site.createdAt);
+        const updatedAt = new Date(site.updatedAt);
+
+        // Only convert to Date if filters.startDate and filters.endDate are not null
         const start = filters.startDate ? new Date(filters.startDate) : null;
         const end = filters.endDate ? new Date(filters.endDate) : null;
-        return (!start || createdAt >= start) && (!end || createdAt <= end);
+
+        // Log dates for clarity
+        console.log('Site createdAt:', createdAt, 'updatedAt:', updatedAt);
+        console.log('Filter start date:', start, 'end date:', end);
+
+        const isWithinCreatedDateRange =
+          start && end && createdAt >= start && createdAt <= end;
+        const isWithinUpdatedDateRange =
+          start && end && updatedAt >= start && updatedAt <= end;
+
+        return isWithinCreatedDateRange || isWithinUpdatedDateRange;
       });
+
+      console.log('Filtered site count after date filter:', filtered.length);
     }
 
-    // Filter by tags
+    // Additional filtering logic for tags, type, country
     if (filters.tags.length > 0) {
       filtered = filtered.filter((site) => {
         const siteTags = site.tags
@@ -37,7 +51,6 @@ export function useFilters(allSites: any[], loading: boolean) {
       });
     }
 
-    // Filter by type
     if (filters.type) {
       filtered = filtered.filter((site) => {
         const siteTags = site.tags
@@ -49,7 +62,6 @@ export function useFilters(allSites: any[], loading: boolean) {
       });
     }
 
-    // Filter by country
     if (filters.country) {
       filtered = filtered.filter(
         (site) => site.address?.country === filters.country,
@@ -59,12 +71,20 @@ export function useFilters(allSites: any[], loading: boolean) {
     return filtered;
   };
 
+  // Only set filtered sites once `allSites` has been loaded
+  useEffect(() => {
+    if (!loading && allSites.length > 0) {
+      setFilteredSites(applyFilters());
+    }
+  }, [allSites, loading]);
+
+  // Update `filteredSites` when filters change (excluding `allSites` to avoid re-trigger)
   useEffect(() => {
     if (!loading) {
       const result = applyFilters();
       setFilteredSites(result);
     }
-  }, [allSites, filters]);
+  }, [filters, loading]);
 
   return { filters, setFilters, filteredSites };
 }

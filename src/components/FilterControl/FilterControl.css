@@ -39,6 +39,11 @@
     border-radius: 5px;
     margin-top: 10px;
   }
+
+  .filter-details label {
+    display: block;
+    margin-bottom: 10px;
+}
   
   .filter-section.expanded .filter-details {
    flex-direction: column;
@@ -110,7 +115,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Afacad', sans-serif;
+    font-size: 1.1rem;
+    
   }
+
+  /* Show full text for larger screens */
+  .filter-toggle-button .filter-text {
+  display: inline; /* Show text by default */
+  margin-right: 8px;
+}
 
   .filter-details {
     display: flex;
@@ -191,7 +205,7 @@
     display: flex;
     align-items: center;
     color: #000000; 
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
   
   .filter-header span:hover {
@@ -211,3 +225,60 @@
 .filter-header:hover svg {
     color: white; 
   }
+
+  .summary-group {
+    margin-top: 5px;
+    padding-left: 15px;
+  }
+  
+  .filter-summary-item {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f4ebff;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.85rem;
+  }
+  
+  .trash-icon {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #7f56d9;
+  }
+  
+  .filter-modal-header h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-modal-header h3 span {
+    background-color: #f4ebff;
+    color: #7f56d9;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-left: 8px;
+  }
+  
+  @media (max-width: 768px) {
+ /* For smaller screens, hide the text and only show the icon */
+ .filter-toggle-button .filter-text {
+  display: none;
+}
+
+.filter-toggle-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Style the filter icon */
+.filter-toggle-button svg {
+  color: #7f56d9; 
+  font-size: 1.8rem;
+  margin: 0; /* Remove any margin around the icon */
+}
+}

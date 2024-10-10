@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineFilterAlt } from 'react-icons/md';
+import { MdOutlineDateRange } from 'react-icons/md';
+import { FaTags } from 'react-icons/fa';
+import { IoMdBusiness } from 'react-icons/io';
+import { TiWorldOutline } from 'react-icons/ti';
 import Modal from '../Modal';
 import FilterSection from './FilterSection';
 import FilterButtons from './FilterButtons';
@@ -7,12 +11,18 @@ import DateFilter from './DateFilter';
 import TagFilter from './TagFilter';
 import TypeFilter from './TypeFilter';
 import CountryFilter from './CountryFilter';
-import FilterSummaryItem from './FilterSummaryItem';
+import {
+  getActiveFilterCount,
+  getTotalAppliedFilters,
+} from '../../helpers/filterHelpers';
+import { useFilters } from '../../hooks/useFilter';
 import './FilterControl.css';
 
 interface FilterControlProps {
   allTags: string[];
   allCountries: string[];
+  allSites?: any[];
+  loading?: boolean;
   onFilterChange: (filters: {
     startDate: string | null;
     endDate: string | null;
@@ -25,18 +35,26 @@ interface FilterControlProps {
 const FilterControl = ({
   allTags,
   allCountries,
+  allSites = [], // Default to an empty array
+  loading = false, // Default to false
   onFilterChange,
 }: FilterControlProps) => {
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
-  const [validationMessage, setValidationMessage] = useState<
-    string | undefined
-  >(undefined);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [resultsCount, setResultsCount] = useState<number>(0);
+
+  // Use the hook to manage filtering and return filtered results
+  const { filters, setFilters, filteredSites } = useFilters(allSites, loading);
+
+  // Update results count whenever filteredSites changes
+  useEffect(() => {
+    setResultsCount(filteredSites.length);
+  }, [filteredSites]);
 
   const resetFilters = () => {
     setStartDate(null);
@@ -44,19 +62,27 @@ const FilterControl = ({
     setSelectedTags([]);
     setSelectedTypes([]);
     setSelectedCountries([]);
-    setValidationMessage(undefined);
     setExpandedSection(null);
+    setFilters({
+      startDate: null,
+      endDate: null,
+      tags: [],
+      type: null,
+      country: null,
+    });
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const handleFilterApply = () => {
-    if (startDate && endDate && new Date(endDate) < new Date(startDate)) {
-      setValidationMessage('End Date should be later than Start Date.');
-      return;
-    }
+    setFilters({
+      startDate,
+      endDate,
+      tags: selectedTags,
+      type: selectedTypes[0] || null,
+      country: selectedCountries[0] || null,
+    });
 
-    setValidationMessage(undefined);
     onFilterChange({
       startDate,
       endDate,
@@ -82,74 +108,88 @@ const FilterControl = ({
     );
   };
 
+  const filterText = getTotalAppliedFilters({
+    startDate,
+    endDate,
+    tags: selectedTags,
+    types: selectedTypes,
+    countries: selectedCountries,
+  });
+
   return (
     <>
       <button onClick={toggleModal} className="filter-toggle-button">
-        Filters <MdOutlineFilterAlt />
+        <span className="filter-text">
+          Filters
+          {getActiveFilterCount({
+            startDate,
+            endDate,
+            tags: selectedTags,
+            types: selectedTypes,
+            countries: selectedCountries,
+          }) > 0 && (
+            <>
+              {' '}
+              (
+              {getActiveFilterCount({
+                startDate,
+                endDate,
+                tags: selectedTags,
+                types: selectedTypes,
+                countries: selectedCountries,
+              })}
+              )
+            </>
+          )}
+        </span>
+        <MdOutlineFilterAlt />
       </button>
 
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
-        {/* Active Filters Summary */}
-        <div className="active-filters-summary">
-          {startDate && endDate && (
-            <FilterSummaryItem
-              label={`Date: ${startDate} - ${endDate}`}
-              onRemove={() => {
-                setStartDate(null);
-                setEndDate(null);
-              }}
-            />
-          )}
-          {selectedTags.map((tag) => (
-            <FilterSummaryItem
-              key={tag}
-              label={`Tag: ${tag}`}
-              onRemove={() =>
-                setSelectedTags(selectedTags.filter((t) => t !== tag))
-              }
-            />
-          ))}
-          {selectedTypes.map((type) => (
-            <FilterSummaryItem
-              key={type}
-              label={`Type: ${type}`}
-              onRemove={() =>
-                setSelectedTypes(selectedTypes.filter((t) => t !== type))
-              }
-            />
-          ))}
-          {selectedCountries.map((country) => (
-            <FilterSummaryItem
-              key={country}
-              label={`Country: ${country}`}
-              onRemove={() =>
-                setSelectedCountries(
-                  selectedCountries.filter((c) => c !== country),
-                )
-              }
-            />
-          ))}
+        <div className="filter-modal-header">
+          <h3>Filters {filterText && <span>{filterText}</span>}</h3>
         </div>
+        {/* Date Section */}
 
-        {/* Filter Sections */}
         <FilterSection
-          title="Date"
+          title={
+            <span>
+              <MdOutlineDateRange />
+              Date
+            </span>
+          }
           expanded={expandedSection === 'date'}
           onToggle={() => toggleSection('date')}
+          summaryItems={
+            startDate && endDate ? [`${startDate} - ${endDate}`] : []
+          }
+          onRemoveSummaryItem={() => {
+            setStartDate(null);
+            setEndDate(null);
+          }}
         >
           <DateFilter
             startDate={startDate}
             endDate={endDate}
             setStartDate={setStartDate}
             setEndDate={setEndDate}
-            validationMessage={validationMessage}
           />
         </FilterSection>
 
+        {/* Tags Section */}
         <FilterSection
-          title="Tags"
+          title={
+            <span>
+              <FaTags />
+              Tag
+            </span>
+          }
           expanded={expandedSection === 'tags'}
           onToggle={() => toggleSection('tags')}
+          summaryItems={selectedTags}
+          onRemoveSummaryItem={(tag) =>
+            setSelectedTags(selectedTags.filter((t) => t !== tag))
+          }
         >
           <TagFilter
             selectedTags={selectedTags}
@@ -159,10 +199,20 @@ const FilterControl = ({
           />
         </FilterSection>
 
+        {/* Type Section */}
         <FilterSection
-          title="Type"
+          title={
+            <span>
+              <IoMdBusiness />
+              Type
+            </span>
+          }
           expanded={expandedSection === 'type'}
           onToggle={() => toggleSection('type')}
+          summaryItems={selectedTypes}
+          onRemoveSummaryItem={(type) =>
+            setSelectedTypes(selectedTypes.filter((t) => t !== type))
+          }
         >
           <TypeFilter
             selectedTypes={selectedTypes}
@@ -172,10 +222,20 @@ const FilterControl = ({
           />
         </FilterSection>
 
+        {/* Country Section */}
         <FilterSection
-          title="Country"
+          title={
+            <span>
+              <TiWorldOutline />
+              Country
+            </span>
+          }
           expanded={expandedSection === 'country'}
           onToggle={() => toggleSection('country')}
+          summaryItems={selectedCountries}
+          onRemoveSummaryItem={(country) =>
+            setSelectedCountries(selectedCountries.filter((c) => c !== country))
+          }
         >
           <CountryFilter
             selectedCountries={selectedCountries}

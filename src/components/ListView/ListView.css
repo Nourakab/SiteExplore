@@ -85,7 +85,7 @@ h3 {
     /* Adjust sort and filter alignment */
     .filter-sort-header {
       flex-direction: column;
-      align-items: flex-start; 
+      align-items: center; 
       gap: 10px; /* Add some space between filter and sort */
     }
   
