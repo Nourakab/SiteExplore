@@ -1,0 +1,103 @@
+h3 {
+    font-size: 1.7rem;
+ 
+}
+
+.list-view {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list-view-item {
+    margin-bottom: 20px;
+  }
+  
+  .site-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .details-button:hover {
+    background-color: #7f56d9;
+    color: white;
+    border: 1px solid #bba6eb; 
+   
+
+  }
+
+/* Carousel Styles */
+.carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .carousel img {
+    width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: cover;
+  }
+  
+  /* Carousel Controls */
+  .carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .carousel-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .carousel-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Hide controls on mobile */
+  @media (max-width: 768px) {
+    .carousel-controls {
+      display: none;
+    }
+  
+    .carousel img {
+      height: 300px;
+    }
+  }
+/* Mobile Specific Styles */
+@media (max-width: 768px) {
+    /* Adjust sort and filter alignment */
+    .filter-sort-header {
+      flex-direction: column;
+      align-items: flex-start; 
+      gap: 10px; /* Add some space between filter and sort */
+    }
+  
+    .carousel img {
+      width: 80vw;
+    }
+  
+    .site-image {
+      width: 100vw; 
+    }
+  }  
+  
+  .site-details{
+    align-items: center;
+  }

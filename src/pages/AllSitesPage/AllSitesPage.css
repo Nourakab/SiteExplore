@@ -1,0 +1,60 @@
+
+.all-sites-page {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column; 
+  }
+
+  .filter-sort-header {
+    display: flex;
+  }
+
+
+.filter-control {
+    width: 20%; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .list-view {
+    width: 40%; 
+    margin: 0 auto; 
+    padding: 10px;
+  }
+  
+  .list-section {
+    width: 100%; 
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  /* Media query for mobile devices */
+@media (max-width: 768px) {
+  .all-sites-page {
+    overflow-x: hidden;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 0 10px; 
+  }
+
+  .filter-sort-header {
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px; 
+  }
+
+  .filter-control {
+    width: 100%; 
+  }
+
+  .list-view {
+    width: 100%; 
+  }
+
+  .list-section {
+    padding: 10px 0; 
+  }
+}

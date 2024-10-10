@@ -1,0 +1,47 @@
+
+.client-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .client-list-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .client-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Client logo styling */
+  .client-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Mobile-first adjustments */
+  @media (max-width: 768px) {
+    .client-logo {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  /* Larger screen adjustments */
+  @media (min-width: 768px) {
+    .client-header h2 {
+      font-size: 1.5rem;
+    }
+  
+    .client-logo {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  

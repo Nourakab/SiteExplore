@@ -1,0 +1,213 @@
+
+.filter-control {
+    padding: 20px;
+    border-radius: 10px;
+    width: 39%;
+   
+  }
+
+.filter-control h3 {
+    display: flex;
+    align-items: center;
+}
+  
+  .filter-section {
+    margin: 25px;
+
+    padding: 8x;
+    font-weight: bold;
+  }
+  
+  .filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 1px solid #bba6eb;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+  }
+  
+  .filter-details {
+    display: none;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .filter-section.expanded .filter-details {
+   flex-direction: column;
+  }
+  
+  .country-badge {
+    background-color: #f4ebff;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .country-badge button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  
+  .expandable-country-list {
+    max-height: 130px;
+    overflow-y: auto;
+    margin-top: 10px;
+  }
+  
+  .country-item {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .country-item.selected {
+    background-color: #7f56d9; 
+    color: white; 
+  }
+  
+  .country-item.selected span {
+    margin-right: 10px; 
+  }
+  
+  .country-item:hover {
+    background-color: #7f56d9; 
+    color: white; 
+  }
+
+  .filter-buttons {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 10px; 
+    margin-top: 20px; 
+    position: sticky;
+  
+  }
+
+  .filter-buttons :hover {
+    background-color: #c3aced;
+    color: white;
+  }
+
+  .filter-toggle-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filter-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+  }
+
+  .filter-details label {
+    margin-bottom: 10px; 
+  }
+  
+  .apply-button {
+    background-color: #7f56d9;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 1px solid #bba6eb; 
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  span {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+  }
+  
+  svg {
+    margin-right: 10px;
+    color: #7e55d8;
+  }
+  
+  /* Target all checkboxes */
+  input[type="checkbox"] {
+    accent-color: #7f56d9; 
+  }
+
+  .filter-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 15px; 
+    font-weight: bold;
+    font-size: 1.4rem;
+    border: 1px solid #bba6eb; 
+    border-radius: 8px; 
+    justify-content: space-between; 
+    position: relative; 
+  }
+
+  .filter-header:hover {
+    background-color: #7f56d9; 
+    color: white; 
+    border-color: #7f56d9; 
+  }
+  
+  .filter-header .arrow {
+    color: #7e55d8; 
+    position: absolute;
+    right: 15px; 
+    font-size: 1.1rem; 
+  }
+
+  .filter-header:hover .arrow {
+    color: white; 
+  }
+  
+  .filter-header span {
+    display: flex;
+    align-items: center;
+    color: #000000; 
+    font-size: 1.4rem;
+  }
+  
+  .filter-header span:hover {
+    background-color: #7f56d9; 
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #bba6eb; 
+  }
+  
+  .filter-header svg {
+    margin-left: 0.5rem;
+    transition: color 0.3s ease;
+    
+  }
+  
+  /* Hover effect for the filter icon */
+.filter-header:hover svg {
+    color: white; 
+  }

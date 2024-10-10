@@ -1,0 +1,59 @@
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 1000;
+  width: 40%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+}
+  
+.modal-close-button:hover{
+  background-color: #7f56d9;
+  color: white;
+  border-radius: 10px;
+}
+  
+  .modal-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 90%; 
+      max-height: 90vh; 
+      overflow-y: auto; 
+    }
+  }
+  

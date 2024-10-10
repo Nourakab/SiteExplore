@@ -1,0 +1,53 @@
+.sort-control {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+  }
+  
+  .sort-control label {
+    font-weight: 500; 
+    margin-right: 10px; 
+  }
+  
+  .sort-control select {
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
+    font-size: 14px; 
+    appearance: none; 
+    background-color: #fff; 
+  }
+  
+  .sort-control button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 5px;
+    color: #5a5a5a; 
+  }
+  
+  .sort-control button:hover {
+    color: #333; 
+  }
+  
+  .sort-control select:focus {
+    outline: none;
+    border-color: #7b61ff; 
+  }
+  
+  /* Media query for mobile devices */
+@media (max-width: 768px) {
+  .sort-control {
+    flex-direction: column; /* Stack the sort control vertically */
+    align-items: flex-start; 
+    gap: 5px;
+    margin-top: 10px; 
+    margin-left: 17px;
+  }
+
+  .sort-control button {
+    margin-left: 0; 
+  }
+}
