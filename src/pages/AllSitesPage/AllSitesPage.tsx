@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFetchData } from '../../hooks/useFetchData';
 import { usePagination } from '../../hooks/usePagination';
 import { useFilters } from '../../hooks/useFilter';
@@ -9,6 +10,7 @@ import FilterControl from '../../components/FilterControl';
 import SortControl from '../../components/SortControl';
 import { useExtractTags } from '../../hooks/useExtractTags';
 import { useExtractCountries } from '../../hooks/useExtractCountries';
+import '../../styles/BackButtonSharedStyles.css';
 import './AllSitesPage.css';
 
 const AllSitesPage = () => {
@@ -25,6 +27,7 @@ const AllSitesPage = () => {
     'title',
     'asc',
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!loading && allSites.length > 0) {
@@ -37,6 +40,9 @@ const AllSitesPage = () => {
 
   return (
     <div className="all-sites-page">
+      <button onClick={() => navigate('/')} className="back-home-button">
+        ← Back to Home
+      </button>
       <h1>All Sites</h1>
       <div className="all-sites-container">
         <div className="filter-sort-header">

@@ -71,3 +71,10 @@ export const getClients = async (
   if (!response.ok) throw new Error('Failed to fetch clients');
   return response.json();
 };
+
+// Fetch user profile data
+export const getUserProfile = async () => {
+  const response = await fetch(`${API_BASE_URL}/me`);
+  if (!response.ok) throw new Error('Failed to fetch user profile');
+  return response.json();
+};

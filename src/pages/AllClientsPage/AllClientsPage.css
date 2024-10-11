@@ -1,0 +1,14 @@
+.controls-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .controls-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:17px;
+    }
+}

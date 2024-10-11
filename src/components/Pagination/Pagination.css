@@ -1,71 +1,98 @@
 .pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  margin: 20px 0; /* Adds some vertical spacing */
+}
+
+.pagination-button {
+  padding: 8px 14px;
+  background-color: #fff;
+  border: 1px solid #7f56d9;
+  border-radius: 6px;
+  font-family: 'Afacad', sans-serif;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination-button.active {
+  background-color: #7f56d9;
+  color: white;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #ccc;
+  border-color: #ccc;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #f4ebff;
+  color: #7f56d9;
+}
+
+.pagination-ellipsis {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 14px;
+  border: 1px solid #7f56d9;
+  border-radius: 6px;
+  color: #7f56d9;
+}
+
+.pagination-dropdown {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100px;
+}
+
+.pagination-ellipsis:hover .pagination-dropdown {
+  display: block;
+}
+
+.pagination-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  background: none;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pagination-dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+.pagination-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7f56d9;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .pagination-button, .pagination-ellipsis {
+      padding: 6px 10px;
+      font-size: 0.9rem;
   }
-  
-  .pagination-button {
-    padding: 6px 12px;
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .pagination-button.active {
-    background-color: #4a90e2;
-    color: white;
-  }
-  
-  .pagination-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .pagination-ellipsis {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-  
-  .pagination-ellipsis:hover .pagination-dropdown {
-    display: block;
-  }
-  
+
   .pagination-dropdown {
-    display: none;
-    position: absolute;
-    bottom: 100%; /* Show dropdown above the ellipsis */
-    left: 0;
-    background-color: white;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    padding: 10px;
-    border-radius: 4px;
+      width: 80px;
   }
-  
-  .pagination-dropdown button {
-    display: block;
-    padding: 5px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-  }
-  
-  .pagination-dropdown button:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .pagination-arrow {
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .pagination-dropdown .active {
-    font-weight: bold;
-  }
-  
+}

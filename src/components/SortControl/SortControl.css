@@ -3,24 +3,9 @@
   align-items: center;
   gap: 10px;
   position: relative;
+  margin-left:25px;
+ 
 }
-
-.sort-toggle {
-  border-radius: 5px;
-  padding: 8px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Afacad', sans-serif;
-  font-size: 1.1rem;
-  border: 1px solid #7f56d9;
-}
-
 .sort-toggle :active {
   color: #7f56d9;
 }
@@ -29,52 +14,14 @@
   font-size: 1.2rem;
 }
 
-.sort-toggle:hover {
-  background-color: #f4ebff;
-}
-
 .order-toggle {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 28px;
   color: #7f56d9;
   display: flex;
   align-items: center;
-}
-
-.order-toggle:hover {
-  color: #5a5a5a;
-}
-
-.sort-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  width: 100%;
-}
-
-.sort-option {
-  padding: 8px 16px;
-  cursor: pointer;
-  color: #333;
-}
-
-.sort-option:hover {
-  background-color: #f2f2f2;
-}
-
-.sort-option.selected {
-  font-weight: bold;
-  color: #7f56d9;
-  background-color: #f4ebff;
 }
 
 @media (max-width: 768px) {

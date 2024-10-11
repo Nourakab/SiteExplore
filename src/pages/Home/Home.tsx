@@ -1,48 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { getClients, getSitesWithPagination } from '../../services/api';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Site } from '../../types/Site';
+import { useFetchData } from '../../hooks/useFetchData';
+import { getUserProfile } from '../../services/api';
+import UserProfile from '../../components/UserProfile/UserProfile';
 import './Home.css';
 
 const Home = () => {
-  const [totalSites, setTotalSites] = useState(0);
-  const [totalClients, setTotalClients] = useState(0);
-  const [recentSites, setRecentSites] = useState<Site[]>([]); // Specify type here
+  const [userName, setUserName] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Loading state for user profile
+  const { clients, sites, loading, error } = useFetchData(1, 5); // Fetch sites and clients
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProfile = async () => {
       try {
-        const clientsData = await getClients();
-        const { data: sitesData } = await getSitesWithPagination(1, 5);
+        const userData = await getUserProfile();
 
-        setTotalClients(clientsData.length);
-        setTotalSites(sitesData.length);
-        setRecentSites(sitesData);
+        setUserName(userData.givenName || 'User');
+        setAvatarUrl(userData.avatar || 'https://via.placeholder.com/150');
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching user profile:', error);
+      } finally {
+        setIsLoading(false); // Set loading to false after fetch completes
       }
     };
 
-    fetchData();
+    fetchProfile();
   }, []);
+
+  if (isLoading || loading) {
+    return <div>Loading...</div>; // Display a loading message while fetching data
+  }
 
   return (
     <div className="home-container">
-      <h1>Welcome to Site Explorer</h1>
       <div className="metrics">
         <div className="metric-item">
           <h3>Total Sites</h3>
-          <p>{totalSites}</p>
+          <p>{sites.length}</p>
         </div>
+        <UserProfile avatarUrl={avatarUrl} givenName={userName} />
         <div className="metric-item">
           <h3>Total Clients</h3>
-          <p>{totalClients}</p>
+          <p>{clients.length}</p>
         </div>
       </div>
       <div className="recent-sites">
         <h2>Recently Added Sites</h2>
         <ul>
-          {recentSites.map((site) => (
+          {sites.map((site) => (
             <li key={site.id}>
               {site.title} - {new Date(site.createdAt).toLocaleDateString()}
             </li>

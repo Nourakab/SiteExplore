@@ -15,6 +15,8 @@
   .back-button {
     text-align: left;
     margin-bottom: 20px;
+    margin-left: -20px;
+   
   }
   
   .back-button button {
@@ -24,6 +26,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
   }
   
   .back-button button:hover {

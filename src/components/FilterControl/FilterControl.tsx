@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { MdOutlineFilterAlt, MdOutlineDateRange } from 'react-icons/md';
 import { FaTags } from 'react-icons/fa';
 import { IoMdBusiness } from 'react-icons/io';
@@ -53,6 +52,7 @@ const FilterControl = ({
     setSelectedCountries([]);
     setExpandedSection(null);
     setDateError(null);
+    // Reset the filter state to show all sites
     setFilters({
       startDate: null,
       endDate: null,
@@ -60,6 +60,17 @@ const FilterControl = ({
       type: null,
       country: null,
     });
+
+    // Directly notify the parent component to update the site list to show all sites
+    onFilterChange({
+      startDate: null,
+      endDate: null,
+      tags: [],
+      types: [],
+      countries: [],
+    });
+
+    setIsModalOpen(false); // Close the modal
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);

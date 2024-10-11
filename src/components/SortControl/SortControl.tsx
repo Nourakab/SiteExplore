@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BiSortDown, BiSortUp } from 'react-icons/bi';
-import { MdOutlineSort } from 'react-icons/md';
 import './SortControl.css';
+import '../../styles/DropdownSharedStyles.css';
 
 interface SortControlProps {
   fields: { label: string; value: string }[];

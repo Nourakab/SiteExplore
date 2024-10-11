@@ -24,10 +24,6 @@ export function useFilters(allSites: any[], loading: boolean) {
         const start = filters.startDate ? new Date(filters.startDate) : null;
         const end = filters.endDate ? new Date(filters.endDate) : null;
 
-        // Log dates for clarity
-        console.log('Site createdAt:', createdAt, 'updatedAt:', updatedAt);
-        console.log('Filter start date:', start, 'end date:', end);
-
         const isWithinCreatedDateRange =
           start && end && createdAt >= start && createdAt <= end;
         const isWithinUpdatedDateRange =
@@ -35,8 +31,6 @@ export function useFilters(allSites: any[], loading: boolean) {
 
         return isWithinCreatedDateRange || isWithinUpdatedDateRange;
       });
-
-      console.log('Filtered site count after date filter:', filtered.length);
     }
 
     // Additional filtering logic for tags, type, country

@@ -117,7 +117,18 @@
     align-items: center;
     font-family: 'Afacad', sans-serif;
     font-size: 1.1rem;
-    
+    cursor: pointer;
+    width: 10%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    background-color: #fff;
+    border: 1px solid #7f56d9;
+    border-radius: 8px;
+    color: #333;
+    font-family: 'Afacad', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
   }
 
   /* Show full text for larger screens */

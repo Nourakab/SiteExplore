@@ -1,0 +1,31 @@
+.back-home-button {
+    background-color: #6c63ff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    width: 13%; 
+  }
+  
+  .back-home-button:hover {
+    background-color: #5548cc;
+  }
+  
+  /* Mobile: 44% width for screens up to 375px */
+  @media (max-width: 375px) {
+    .back-home-button {
+      width: 44%;
+    }
+  }
+
+  /* Medium: 37% width for screens between 425px and 768px */
+  @media (min-width: 380px) and (max-width: 748px)  {
+    .back-home-button {
+      width: 37%;
+    }
+  }
+  
