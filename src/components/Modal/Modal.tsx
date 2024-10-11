@@ -13,6 +13,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   return (
     <>
       {/* Overlay */}
+      <div className="modal-overlay" onClick={onClose}></div>
 
       {/* Modal Content */}
       <div className="modal-content">

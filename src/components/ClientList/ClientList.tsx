@@ -1,5 +1,5 @@
 import React from 'react';
-import ListView from '../ListView/ListView';
+import ListView from '../ListView';
 import SortControl from '../SortControl';
 import { useSort } from '../../hooks/useSort';
 import { Client } from '../../types/Client';

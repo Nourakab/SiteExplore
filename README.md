@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# Site Explorer Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **Site Explorer** web application built using **React**, **TypeScript**. It features filtering, pagination, and carousel functionalities, all designed to enhance the user experience when exploring a large number of sites.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Installation](#installation)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Testing](#testing)
+- [Challenges](#challenges)
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To get started, clone the repository and install the necessary dependencies.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+git clone https://github.com/Nourakab/site-explorer.git
+cd site-explorer
+npm install
+Start the development server:
+npm start
+Build the project for production:
+npm run build
 
-### `npm test`
+### Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once the server is running, you can access the application by navigating to http://localhost:3000 in your browser.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+React - Frontend library
+TypeScript - Typed JavaScript
+Jest - For unit and integration testing
+React Testing Library - For testing React components
+CSS Modules - For scoped styling
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Filter Options: Users can filter sites by tags, date range, type, etc.
+Sorting: Sort by different fields such as title, date created, etc.
+Filter by Date and Tags: Users can filter the displayed sites by date, renovation status (new, old, renovated), or type (individual, company, state).
+Pagination: Efficient navigation through thousands of sites with dynamic pagination.
+Image Carousel: A carousel that allows users to view multiple images per site.
+Responsive Design: Optimized for both desktop and mobile devices.
 
-### `npm run eject`
+## Testing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project uses Jest and React Testing Library for unit testing.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the tests:
+npm test
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Tests are located in the src/**tests**/ folder.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Challenges
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Jest Configuration for TypeScript and CSS Modules
+Issue: Configuring Jest to work seamlessly with TypeScript and CSS modules was challenging. I encountered multiple errors, including missing module imports and syntax errors related to CSS files.
+Solution: I added ts-jest as a transformer to handle TypeScript, and used moduleNameMapper in my Jest configuration to mock CSS imports. Additionally, I made sure all dependencies were compatible by aligning the versions of Jest, ts-jest, and jest-environment-jsdom. This setup allowed my tests to pass smoothly and improved compatibility.

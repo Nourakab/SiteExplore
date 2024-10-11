@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BiSortDown, BiSortUp } from 'react-icons/bi';
+import { MdOutlineSort } from 'react-icons/md';
 import './SortControl.css';
 
 interface SortControlProps {
-  fields: { label: string; value: string }[]; // Array of sorting fields
+  fields: { label: string; value: string }[];
   selectedField: string;
-  order: 'asc' | 'desc'; // Sorting order
-  onSortChange: (field: string, order: 'asc' | 'desc') => void; // Callback for sorting change
+  order: 'asc' | 'desc';
+  onSortChange: (field: string, order: 'asc' | 'desc') => void;
 }
 
 const SortControl = ({
@@ -15,31 +16,63 @@ const SortControl = ({
   order,
   onSortChange,
 }: SortControlProps) => {
-  // Toggles the sorting order between ascending and descending
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const toggleOrder = () => {
     const newOrder = order === 'asc' ? 'desc' : 'asc';
     onSortChange(selectedField, newOrder);
   };
 
-  return (
-    <div className="sort-control">
-      <label htmlFor="sort-field">Sort by:</label>
-      <select
-        id="sort-field"
-        value={selectedField}
-        onChange={(e) => {
-          onSortChange(e.target.value, order);
-        }}
-      >
-        {fields.map((field) => (
-          <option key={field.value} value={field.value}>
-            {field.label}
-          </option>
-        ))}
-      </select>
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
-      {/* Sort toggle button with icons */}
-      <button onClick={toggleOrder}>
+  // Close the dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  return (
+    <div className="sort-control" ref={menuRef}>
+      <button onClick={toggleMenu} className="sort-toggle">
+        Sort by: {fields.find((field) => field.value === selectedField)?.label}
+      </button>
+
+      {isMenuOpen && (
+        <div className="sort-menu">
+          {fields.map((field) => (
+            <div
+              key={field.value}
+              className={`sort-option ${
+                field.value === selectedField ? 'selected' : ''
+              }`}
+              onClick={() => {
+                onSortChange(field.value, order);
+                setIsMenuOpen(false);
+              }}
+            >
+              {field.label}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <button onClick={toggleOrder} className="order-toggle">
         {order === 'asc' ? <BiSortUp /> : <BiSortDown />}
       </button>
     </div>

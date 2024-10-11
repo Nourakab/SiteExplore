@@ -13,6 +13,7 @@
   .filter-sort-header {
     display: flex;
     margin-left: 25px;
+    gap:30px;
     
   }
 

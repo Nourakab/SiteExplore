@@ -71,14 +71,14 @@ export function useFilters(allSites: any[], loading: boolean) {
     return filtered;
   };
 
-  // Only set filtered sites once `allSites` has been loaded
+  // Only set filtered sites once allSites has been loaded
   useEffect(() => {
     if (!loading && allSites.length > 0) {
       setFilteredSites(applyFilters());
     }
   }, [allSites, loading]);
 
-  // Update `filteredSites` when filters change (excluding `allSites` to avoid re-trigger)
+  // Update filteredSites when filters change (excluding allSites to avoid re-trigger)
   useEffect(() => {
     if (!loading) {
       const result = applyFilters();
